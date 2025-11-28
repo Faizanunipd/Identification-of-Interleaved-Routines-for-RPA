@@ -6,8 +6,7 @@ Robotic Process Automation (RPA).
 
 ## Overview
 
-Given a UI log (`\Sigma `{=tex}`\in `{=tex}A\^{\*}), the method follows
-two main phases:
+Given a UI log the method follows two main phases:
 
 ### 1. Normalized Directly-Follows Graph (NDFG)
 
@@ -45,5 +44,6 @@ print(clusters)
 
 This repository supports research on the discovery of **interleaved
 routines** in RPA environments.
+
 
 
