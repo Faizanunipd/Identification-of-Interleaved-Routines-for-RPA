@@ -47,4 +47,62 @@ routines** in RPA environments.
 
 
 
+# 2nd Option
+
+This work analyzes UI logs generated from three randomly selected routine types.  
+The following processing pipeline is used:
+
+---
+
+### 1. UI Log Construction
+- Select 3 routine types at random.
+- Generate UI event logs by merging their event traces.
+- Preserve the internal event order of each routine.
+
+---
+
+### 2. Directly-Follows Graph (DFG) Frequency Computation
+- Build a DFG from the UI logs.
+- Count frequencies of all directly-following event pairs:
+  - (A → B), (B → C), (C → D), etc.
+- Store edge frequencies as:  
+  - `DFG[(event_i, event_j)] = count`
+
+**Example:**
+- A → B : 12  
+- B → C : 8  
+- C → A : 5
+
+---
+
+### 3. Frequency Normalization using Maximum Likelihood Estimation (MLE)
+- Convert raw frequencies to probabilities using MLE:
+  
+  `P(event_j | event_i) = freq(event_i → event_j) / sum(freq of all outgoing edges from event_i)`
+
+- Produces a normalized transition probability matrix.
+
+**Example:**
+- A → B : 0.48  
+- A → C : 0.52
+
+---
+
+### 4. Community Detection with Infomap
+- Convert the normalized DFG into a weighted directed graph.
+- Apply **Infomap** to detect functional communities.
+- Identifies clusters of events frequently appearing together in interleaved routines.
+
+---
+
+### Output Artifacts
+- Normalized DFG (probability-based)
+- Weighted graph representation
+- Infomap community partitions
+- Visualizations (optional): graph plots, transition heatmaps, cluster diagrams
+
+
+
+
+
 
